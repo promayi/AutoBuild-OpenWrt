@@ -5,15 +5,15 @@
 # Youtube Channel: https://goo.gl/fvkdwm 
 #=================================================
 
-name: Build_x86_64 v0.2
+name: Build_x86_64 v0.2 Add vssr and theme-argon
 
 on: 
   release:
     types: [published]
 
-  push:
-    branches: 
-      - master
+  #push:
+  #  branches: 
+  #    - master
 
   #schedule:
   #  - cron: 0 8 * * 5
