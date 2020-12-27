@@ -11,9 +11,9 @@ on:
   release:
     types: [published]
 
-  push:
-    branches: 
-      - master
+  #push:
+  #  branches: 
+  #    - master
 
   #schedule:
   #  - cron: 0 8 * * 5
@@ -23,7 +23,7 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-18.04
 
     steps:
     - name: Checkout
@@ -69,9 +69,11 @@ jobs:
     - name: Remove original argon theme package
       working-directory: ./openwrt
       run: |
-        cd package/lean
+        cd package
+        pushd ../package/lean
         rm -rf luci-theme-argon
-        git clone https://github.com/jerrykuku/luci-theme-argon.git
+        git clone -b 18.06 https://github.com/jerrykuku/luci-theme-argon luci-theme-argon
+        sed -i 's/luci-theme-bootstrap/luci-theme-argon/g' ../feeds/luci/collections/luci/Makefile
     
     - name: Custom plug-in
       working-directory: ./openwrt
@@ -81,7 +83,6 @@ jobs:
         cd openwrt-packages
         git clone https://github.com/jerrykuku/lua-maxminddb.git
         git clone https://github.com/jerrykuku/luci-app-vssr.git
-        git clone https://github.com/vernesong/OpenClash.git
     
     - name: Update & Install feeds
       working-directory: ./openwrt
