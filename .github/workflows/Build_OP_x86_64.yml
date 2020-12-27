@@ -65,6 +65,13 @@ jobs:
         git clone --depth 1 $REPO_URL -b $REPO_BRANCH openwrt
         cd openwrt
         sed -i 's/#src-git helloworld/src-git helloworld/g' ./feeds.conf.default
+        
+    - name: Remove original argon theme package
+      working-directory: ./openwrt
+      run: |
+        cd lede/package/lean
+        rm -rf luci-theme-argon
+        git clone https://github.com/jerrykuku/luci-theme-argon.git
     
     - name: Custom plug-in
       working-directory: ./openwrt
@@ -72,7 +79,6 @@ jobs:
         cd package
         mkdir openwrt-packages
         cd openwrt-packages
-        git clone https://github.com/jerrykuku/luci-theme-argon.git
         git clone https://github.com/jerrykuku/lua-maxminddb.git
         git clone https://github.com/jerrykuku/luci-app-vssr.git
         git clone https://github.com/vernesong/OpenClash.git
