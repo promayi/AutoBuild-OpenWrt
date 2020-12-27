@@ -69,7 +69,7 @@ jobs:
     - name: Remove original argon theme package
       working-directory: ./openwrt
       run: |
-        cd lede/package/lean
+        cd package/lean
         rm -rf luci-theme-argon
         git clone https://github.com/jerrykuku/luci-theme-argon.git
     
